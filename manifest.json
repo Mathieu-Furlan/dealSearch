@@ -1,0 +1,20 @@
+{
+
+  "manifest_version": 2,
+  "name": "dealSearch",
+  "version": "1.0",
+
+  "description": "Shortcut and enhanced search for dealabs",
+
+  "icons": {
+    "48": "icons/deal-icon.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.dealabs.com/"],
+      "js": ["optionsDeal.js"]
+    }
+  ]
+
+}
