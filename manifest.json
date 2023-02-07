@@ -12,7 +12,7 @@
 
   "content_scripts": [
     {
-      "matches": ["https://www.dealabs.com/"],
+      "matches": ["https://www.dealabs.com/*"],
       "js": ["optionsDeal.js"]
     }
   ]
