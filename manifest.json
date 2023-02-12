@@ -1,20 +1,25 @@
 {
-
+  "description": "Shortcut and enhanced search for dealabs",
   "manifest_version": 2,
   "name": "dealSearch",
   "version": "1.0",
 
-  "description": "Shortcut and enhanced search for dealabs",
+  "permissions": [
+    "storage"
+  ],
 
-  "icons": {
-    "48": "icons/deal-icon.png"
+  "browser_action": {
+    "browser_style": true,
+    "default_popup": "popup/choose_deal.html",
+    "default_icon": {
+      "48": "icons/deal-icon.png"
+    }
   },
-
+  
   "content_scripts": [
     {
       "matches": ["https://www.dealabs.com/*"],
       "js": ["optionsDeal.js"]
     }
   ]
-
 }
