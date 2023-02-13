@@ -9,6 +9,20 @@ function apresRech(groupes, valeurArticle){
         if(obj.title.toLowerCase() == valeurArticle.toString().toLowerCase()){
             window.location.replace(obj.href);
         }
+        else{
+            const observer = new MutationObserver(function (mutations, mutationInstance){
+                const posts = document.getElementsByTagName("article");
+                if(posts.length > 10){
+                    creerPage(posts);
+                    mutationInstance.disconnect();
+                }
+            });
+        
+            observer.observe(document, {
+                childList: true,
+                subtree: true
+            });
+        }
     }
 }
 function creerPage(posts){
@@ -45,7 +59,7 @@ else if(window.location.href.indexOf("search?q=") != -1){
         valeurArticle = donnee.data;
     });
     const observer = new MutationObserver(function (mutations, mutationInstance){
-        const groupes = document.getElementsByClassName("button button--type-tag button--shape-rounded button--mode-light");
+        const groupes = document.getElementsByClassName("button button--type-tag button--mode-light");
         if(groupes.length > 0){
             apresRech(groupes, valeurArticle);
             mutationInstance.disconnect();
@@ -57,7 +71,7 @@ else if(window.location.href.indexOf("search?q=") != -1){
         subtree: true
     });
 }
-if(window.location.href.indexOf("search?q=") != -1 && window.location.href.indexOf("groupe") != -1){
+else if(window.location.href.indexOf("groupe") != -1){
     const observer = new MutationObserver(function (mutations, mutationInstance){
         const posts = document.getElementsByTagName("article");
         if(posts.length > 10){
