@@ -11,7 +11,7 @@ function apresRech(groupes, valeurArticle){
         }
         else{
             const observer = new MutationObserver(function (mutations, mutationInstance){
-                const posts = document.getElementsByTagName("article");
+                const posts = document.getElementsByClassName("thread-price");
                 if(posts.length > 10){
                     creerPage(posts);
                     mutationInstance.disconnect();
@@ -28,11 +28,16 @@ function apresRech(groupes, valeurArticle){
 function creerPage(posts){
     console.log(posts);
     console.log(posts.length);
-    let cont = "";
+    let suppr = null;
     for(let post of posts){
-        let ajo = post.outerHTML;
-        cont = cont + ajo + "<br>";
-        console.log(cont);
+        let ajo = parseInt(post.innerHTML, 10);
+        console.log(ajo);
+        browser.storage.local.get("alt", function(donnee){
+            if(ajo > donnee.alt){
+                suppr = post.closest("article");
+                suppr.remove();
+            }
+        });
     }
 }
 if(window.location.href === "https://www.dealabs.com/"){
@@ -73,7 +78,7 @@ else if(window.location.href.indexOf("search?q=") != -1){
 }
 else if(window.location.href.indexOf("groupe") != -1){
     const observer = new MutationObserver(function (mutations, mutationInstance){
-        const posts = document.getElementsByTagName("article");
+        const posts = document.getElementsByClassName("thread-price");
         if(posts.length > 10){
             creerPage(posts);
             mutationInstance.disconnect();
